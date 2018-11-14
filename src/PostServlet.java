@@ -27,6 +27,7 @@ public class PostServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json"); // Response mime type
 
 		// Retrieve parameter limit from url request.

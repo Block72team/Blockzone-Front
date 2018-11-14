@@ -1,8 +1,8 @@
 
 function handleContent(content) {
-    var string = content.replace(/<(?:.|\n)*?>/gm, '');
-    var strings = string.split('.', 5);
-    var result = "";
+    let string = content.replace(/<(?:.|\n)*?>/gm, '');
+    let strings = string.split('.', 5);
+    let result = "";
     for(let i = 0; i < strings.length; ++i) {
         if(result.length + strings[i].length < 400)
             result += strings[i] + '. ';
@@ -24,45 +24,56 @@ function handlePostPreviewResult(resultData) {
     // Iterate through resultData, no more than 10 entries
     for (let i = 0; i < resultData.length; i++) {
         // Concatenate the html tags with resultData jsonObject
-        let rowHTML = '<div class="media">';
-        rowHTML += '<img class="align-self-start mr-3" src="' + resultData[i]['thumb_url'] + '" style="width: 30%" alt="Generic placeholder image">';
-        rowHTML += '<div class="media-body">';
-        rowHTML += '<h3 class="mt-0"><a href="post.html?id=' + resultData[i]['id'] + '">' + resultData[i]['title'] + '</a></h3>';
-        rowHTML += '<p>' + handleContent(resultData[i]['content']) + '</p>';
-        rowHTML += '<div style="display: inline-block;color: gray;float: right">';
-        rowHTML += '<small><i class="far fa-star" style="margin-right: 5px;"></i><a href="post-preview.html?category=' + resultData[i]['c_id'] + '">' + resultData[i]['c_name'] + '</a></small>';
-        rowHTML += '<small><i class="far fa-user" style="margin-right: 5px; margin-left: 10px"></i><a href="post-preview.html?author=' + resultData[i]['author'] + '">' + resultData[i]['author'] + '</a></small>';
-        rowHTML += '<small><i class="far fa-clock" style="margin-right: 5px;margin-left: 10px"></i><a href="post-preview.html?time=' + resultData[i]['update_time'].substring(0,10) + '">' + resultData[i]['update_time'].substring(0,10) + '</a></small>';
-        rowHTML += '</div></div></div><hr>';
+        let rawHTML = '<div class="media">';
+        rawHTML += '<img class="align-self-start mr-3" src="' + resultData[i]['thumb_url'] + '" style="width: 30%" alt="Generic placeholder image">';
+        rawHTML += '<div class="media-body">';
+        rawHTML += '<h3 class="mt-0"><a href="post.html?id=' + resultData[i]['id'] + '">' + resultData[i]['title'] + '</a></h3>';
+        rawHTML += '<p>' + handleContent(resultData[i]['content']) + '</p>';
+        rawHTML += '<div style="display: inline-block;color: gray;float: right">';
+        rawHTML += '<small><i class="far fa-star" style="margin-right: 5px;"></i><a href="post-preview.html?category=' + resultData[i]['c_id'] + '">' + resultData[i]['c_name'] + '</a></small>';
+        rawHTML += '<small><i class="far fa-user" style="margin-right: 5px; margin-left: 10px"></i><a href="post-preview.html?author=' + resultData[i]['author'] + '">' + resultData[i]['author'] + '</a></small>';
+        rawHTML += '<small><i class="far fa-clock" style="margin-right: 5px;margin-left: 10px"></i><a href="post-preview.html?time=' + resultData[i]['update_time'].substring(0,10) + '">' + resultData[i]['update_time'].substring(0,10) + '</a></small>';
+        rawHTML += '</div></div></div><hr>';
 
-        postPreviewElement.append(rowHTML);
+        postPreviewElement.append(rawHTML);
     }
+}
 
-    let carouselPostElement = jQuery("#carousel-posts");
-    let carouselIndicator = jQuery('#indicator');
-    let carouselLimit = 4;
+function handleFeaturedPostResult(resultData) {
+    console.log("handleFeaturedPostResult: ");
+    console.log(resultData);
+
+    let featuredPostElement = jQuery("#featured-posts");
     var active = 'active';
 
-    for(let i = 0; i < carouselLimit; i++) {
-        let indicatorHtml = '';
-        indicatorHtml += '<li data-target="#carousel" data-slide-to="' + i + '" class="' + active + '"></li>'
-        carouselIndicator.append(indicatorHtml);
-
-        let rowHTML = '<div class="carousel-item ' + active+ '">';
+    for(let i = 0; i < featuredLimit; i++) {
+        let rawHTML =   '<div class="carousel-item ' + active + ' ">' +
+                            '<div class="card text-white">' +
+                                '<div style="max-height: 30vw">' +
+                                    '<img class="card-img img-fluid" src="' + resultData[i]['photo_url'] + '" alt="">' +
+                                '</div>' +
+                                '<div class="card-img-overlay d-flex linkfeat">' +
+                                    '<a href="post.html?id=' + resultData[i]['id'] + '" class="align-self-end">' + 
+                                        '<span class="badge">' + resultData[i]['c_name'] + '</span>' +
+                                        '<h4 class="card-title">' + resultData[i]['title'] + '</h4>' +
+                                        '<p class="textfeat" style="display: none;">' + handleContent(resultData[i]['content']) + '</p>' +
+                                    '</a>' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>';
         active = '';
-        rowHTML += '<a href="post.html?id=' + resultData[i]['id'] + '">' 
-        rowHTML += '<div style="max-height:550px;">'
-        rowHTML += '<div style="position: absolute; padding: 5% 0% 0% 7%">'
-        rowHTML += '<div class="text-white" style="background-color: rgba(58, 54, 93, 0.7); width: 70%">'
-        rowHTML += '<div style="padding: 10px"><h5>' + resultData[i]['c_name'] + '</h5><br>'
-        rowHTML += '<h1>' + resultData[i]['title'] + '</h1><br>';
-        rowHTML += '<p class="d-none d-sm-block">' + handleContent(resultData[i]['content']) + '</p>';
-        rowHTML += '</div></div></div>'
-        rowHTML += '<img class="img-responsive" style="width: 100%" src="' + resultData[i]['photo_url'] + '" alt="#' + i + ' slide"></a><div>';
-        rowHTML += '</div></div>';
-
-        carouselPostElement.append(rowHTML);
+        featuredPostElement.append(rawHTML);
     }
+
+    $(".linkfeat").hover(
+        function () {
+            $(".textfeat").show(500);
+        },
+        function () {
+            $(".textfeat").hide(500);
+        }
+    );
+
 }
 
 function handleTopPostResult(resultData) {
@@ -76,70 +87,61 @@ function handleTopPostResult(resultData) {
     // Iterate through resultData, no more than 10 entries
     for (let i = 0; i < resultData.length; i++) {
         // Concatenate the html tags with resultData jsonObject
-        let rowHTML = '<div class="media">';
-        rowHTML += '<img class="align-self-start mr-3" src="' + resultData[i]['thumb_url'] + '" style="width: 30%" alt="Generic placeholder image">';
-        rowHTML += '<div class="media-body">';
-        rowHTML += '<p class="mt-0" style="font-size: medium;><a href="post.html?id=' + resultData[i]['id'] + '">' + resultData[i]['title'] + '</a></hp>';
-        // rowHTML += '<div style="display: inline-block;color: gray;float: right">';
-        // rowHTML += '<small><i class="far fa-clock" style="margin-right: 5px;margin-left: 10px"></i><a href="post-preview.html?time=' + resultData[i]['update_time'].substring(0,10) + '">' + resultData[i]['update_time'].substring(0,10) + '</a></small>';
-        rowHTML += '</div></div><hr>';
+        let rawHTML = '<div class="media">';
+        rawHTML += '<img class="align-self-start mr-3" src="' + resultData[i]['thumb_url'] + '" style="width: 30%" alt="Generic placeholder image">';
+        rawHTML += '<div class="media-body">';
+        rawHTML += '<p class="mt-0" style="font-size: medium;"><a href="post.html?id=' + resultData[i]['id'] + '">' + resultData[i]['title'] + '</a></hp>';
+        // rawHTML += '<div style="display: inline-block;color: gray;float: right">';
+        // rawHTML += '<small><i class="far fa-clock" style="margin-right: 5px;margin-left: 10px"></i><a href="post-preview.html?time=' + resultData[i]['update_time'].substring(0,10) + '">' + resultData[i]['update_time'].substring(0,10) + '</a></small>';
+        rawHTML += '</div></div><hr>';
 
-        handleTopPostResult.append(rowHTML);
+        handleTopPostResult.append(rawHTML);
     }
 }
 
+function handleCategoryFeatured(resultData) {
+    console.log("handling category featured");
+    console.log(resultData);
 
-/**
- * Once this .js is loaded, following scripts will be executed by the browser
- */
+    let categoryFeatured = jQuery("#category-featured");
 
-let limit = 12;
+    for(let i = 0; i < resultData.length; i++) {
+        let rawHTML =   '<div class="col-3">' +
+                            '<div class="card text-white">' + 
+                                '<div style="height: 10vw; overflow: hidden">' +
+                                    '<img class="card-img img-fluid" src="' + resultData[i]['thumb_url'] + '" alt="">' +
+                                '</div>' +
+                                '<div class="card-img-overlay d-flex linkfeat-sub">' +
+                                    '<a href="post.html?id=' + resultData[i]['id'] + '" class="align-self-end">' + 
+                                        '<span class="badge">' + resultData[i]['c_name'] + '</span>' +
+                                        '<h6 class="card-title">' + resultData[i]['title'] + '</h6>' +
+                                    '</a>' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>';
+        categoryFeatured.append(rawHTML);
+    }
+}
 
-// Makes the HTTP GET request and registers on success callback function handleStarResult
-jQuery.ajax({
-    dataType: "json", // Setting return data type
-    method: "GET", // Setting request method
-    url: "api/post-preview?limit=" + limit + '&page=' + 0, // Setting request url, which is mapped by StarsServlet in Stars.java
-    success: (resultData) => handlePostPreviewResult(resultData) // Setting callback function to handle data returned successfully by the StarsServlet
-});
+function getCategoryFeatured() {
+    for(let i = 0; i < 4; i++) {
+        jQuery.ajax({
+            dataType: "json", // Setting return data type
+            method: "GET", // Setting request method
+            url: "api/post-preview?limit=1&page=0&category=" + i + '&tag=212&tagName=Blockchain',
+            success: (resultData) => handleCategoryFeatured(resultData) // Setting callback function to handle data returned successfully
+        });
+    }
+}
 
-jQuery.ajax({
-    dataType: "json", // Setting return data type
-    method: "GET", // Setting request method
-    url: "api/topnews?limit=" + '10', // Setting request url, which is mapped by StarsServlet in Stars.java
-    success: (resultData) => handleTopPostResult(resultData) // Setting callback function to handle data returned successfully by the StarsServlet
-});
-
-let page = 0;
 function getPostPreviews() {
-    page += 1;
     jQuery.ajax({
         dataType: "json", // Setting return data type
         method: "GET", // Setting request method
-        url: "api/post-preview?limit=" + limit + '&page=' + page, // Setting request url, which is mapped by StarsServlet in Stars.java
-        success: function(resultData) {
-            console.log('appending more posts');
-            console.log(resultData);
-            let postPreviewElement = jQuery("#posts");
-
-            // Iterate through resultData, no more than 10 entries
-            for (let i = 0; i < resultData.length; i++) {
-                // Concatenate the html tags with resultData jsonObject
-                let rowHTML = '<div class="media">';
-                rowHTML += '<img class="align-self-start mr-3" src="' + resultData[i]['thumb_url'] + '" style="width: 30%" alt="Generic placeholder image">';
-                rowHTML += '<div class="media-body">';
-                rowHTML += '<h3 class="mt-0"><a href="post.html?id=' + resultData[i]['id'] + '">' + resultData[i]['title'] + '</a></h3>';
-                rowHTML += '<p>' + handleContent(resultData[i]['content']) + '</p>';
-                rowHTML += '<div style="display: inline-block;color: gray;float: right">';
-                rowHTML += '<small><i class="far fa-star" style="margin-right: 5px;"></i><a href="post-preview.html?category=' + resultData[i]['c_id'] + '">' + resultData[i]['c_name'] + '</a></small>';
-                rowHTML += '<small><i class="far fa-user" style="margin-right: 5px; margin-left: 10px"></i><a href="post-preview.html?author=' + resultData[i]['author'] + '">' + resultData[i]['author'] + '</a></small>';
-                rowHTML += '<small><i class="far fa-clock" style="margin-right: 5px;margin-left: 10px"></i><a href="post-preview.html?time=' + resultData[i]['update_time'].substring(0,10) + '">' + resultData[i]['update_time'].substring(0,10) + '</a></small>';
-                rowHTML += '</div></div></div><hr>';
-
-                postPreviewElement.append(rowHTML);
-            }
-        } 
+        url: "api/post-preview?limit=" + limit + '&page=' + page, 
+        success: (resultData) => handlePostPreviewResult(resultData) // Setting callback function to handle data returned successfully
     });
+    page++;
 }
 
 function search() {
@@ -166,3 +168,44 @@ function subscribe() {
         }
     })
 }
+
+
+/**
+ * Once this .js is loaded, following scripts will be executed by the browser
+ */
+
+let limit = 12;
+let page = 0;
+
+// featured content
+let featuredLimit = 4;
+jQuery.ajax({
+    dataType: "json", 
+    method: "GET",
+    url: "api/post-preview?limit=" + featuredLimit + '&page=' + page + '&tag=210&tagName=Featured',
+    success: (resultData) => handleFeaturedPostResult(resultData) 
+});
+
+
+
+getPostPreviews(); //initial
+getCategoryFeatured();
+
+//get top posts
+jQuery.ajax({
+    dataType: "json", 
+    method: "GET",
+    url: "api/topnews?limit=" + '10', 
+    success: (resultData) => handleTopPostResult(resultData) 
+});
+
+
+// Initialize the plugin
+$('#subscribe-popup').popup({
+    transition: 'all 0.3s',
+    scrolllock: true,
+    autoopen: true,
+});
+
+
+

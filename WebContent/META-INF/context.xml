@@ -13,6 +13,6 @@
               username="xiangj1"
               password="password" 
               driverClassName="com.mysql.jdbc.Driver"
-              url="jdbc:mysql://localhost:3306/blockzone?autoReconnect=true&amp;useSSL=false&amp;cachePrepStmts=true"/>
+              url="jdbc:mysql://167.99.238.182:3306/blockzone?autoReconnect=true&amp;useSSL=false&amp;cachePrepStmts=true"/>
 
 </Context>

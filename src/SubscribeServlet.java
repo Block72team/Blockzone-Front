@@ -28,6 +28,7 @@ public class SubscribeServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		response.setContentType("application/json"); // Response mime type
+		response.setCharacterEncoding("UTF-8");
 
 		// Retrieve parameter limit from url request.
 		String email = request.getParameter("email");

@@ -27,3 +27,5 @@ target/
 .settings/
 
 deploy.sh
+.DS_Store
+test.html

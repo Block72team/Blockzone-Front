@@ -27,6 +27,7 @@ public class PostPreviewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json"); // Response mime type
 
 		// Retrieve parameter limit from url request.
@@ -67,6 +68,7 @@ public class PostPreviewServlet extends HttpServlet {
 				  query += tag != null ? "and pt.tag_id = ? " : "";
 				  query += "group by p.id, title, author, content, p.update_time, c_name, i.thumb_url, photo_url ";
 				  query += "order by p.update_time DESC limit ?,?";
+			System.out.println(query);
 				  
 			// Declare our statement
 			PreparedStatement statement = dbcon.prepareStatement(query);
