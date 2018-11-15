@@ -29,6 +29,7 @@ public class TopNewsServlet extends HttpServlet {
 
 		response.setContentType("application/json"); // Response mime type
 		response.setCharacterEncoding("UTF-8");
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		
 		// Retrieve parameter limit from url request.
 		String limit = request.getParameter("limit");

@@ -29,6 +29,7 @@ public class PostPreviewServlet extends HttpServlet {
 
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json"); // Response mime type
+		response.setHeader("Access-Control-Allow-Origin", "*");
 
 		// Retrieve parameter limit from url request.
 		String limit = request.getParameter("limit");

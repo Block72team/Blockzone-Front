@@ -94,7 +94,7 @@ let id = getParameterByName('id');
 jQuery.ajax({
     dataType: "json", // Setting return data type
     method: "GET", // Setting request method
-    url: "api/post?id=" + id, // Setting request url, which is mapped by StarsServlet in Stars.java
+    url: "http://167.99.238.182:8080/Blockzone/api/post?id=" + id, // Setting request url, which is mapped by StarsServlet in Stars.java
     success: (resultData) => handlePostResult(resultData) // Setting callback function to handle data returned successfully by the StarsServlet
 });
 
@@ -102,7 +102,7 @@ let limit = 10;
 jQuery.ajax({
     dataType: "json", // Setting return data type
     method: "GET", // Setting request method
-    url: "api/topnews?limit=" + limit, // Setting request url, which is mapped by StarsServlet in Stars.java
+    url: "http://167.99.238.182:8080/Blockzone/api/topnews?limit=" + limit, // Setting request url, which is mapped by StarsServlet in Stars.java
     success: (resultData) => handleTopPostResult(resultData) // Setting callback function to handle data returned successfully by the StarsServlet
 });
 
@@ -110,7 +110,7 @@ function like() {
     jQuery.ajax({
         dataType: "json",
         method: "GET",
-        url: "api/like?id=" + id,
+        url: "http://167.99.238.182:8080/Blockzone/api/like?id=" + id,
         success: function(resultData) {
             console.log(resultData);
             document.getElementById("like").setAttribute('disabled', 'disabled');
@@ -132,7 +132,7 @@ function subscribe() {
     jQuery.ajax({
         dataType: "json",
         method: "GET",
-        url: "api/subscribe?email=" + email,
+        url: "http://167.99.238.182:8080/Blockzone/api/subscribe?email=" + email,
         success: function(resultData) {
             console.log(resultData);
             if(resultData['status'] == true) {

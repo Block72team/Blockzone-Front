@@ -29,6 +29,7 @@ public class SubscribeServlet extends HttpServlet {
 
 		response.setContentType("application/json"); // Response mime type
 		response.setCharacterEncoding("UTF-8");
+		response.setHeader("Access-Control-Allow-Origin", "*");
 
 		// Retrieve parameter limit from url request.
 		String email = request.getParameter("email");

@@ -28,6 +28,7 @@ public class LikePostServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		response.setContentType("application/json"); // Response mime type
+		response.setHeader("Access-Control-Allow-Origin", "*");
 
 		// Retrieve parameter limit from url request.
 		String id = request.getParameter("id");

@@ -26,6 +26,6 @@ function handleTopPostResult(resultData) {
 jQuery.ajax({
     dataType: "json", 
     method: "GET",
-    url: "api/topnews?limit=" + '10', 
+    url: "http://167.99.238.182:8080/Blockzone/api/topnews?limit=" + '10', 
     success: (resultData) => handleTopPostResult(resultData) 
 });

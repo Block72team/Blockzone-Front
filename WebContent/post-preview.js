@@ -93,7 +93,7 @@ let keyword = getParameterByName('keyword');
 let tag = getParameterByName('tag');
 let tagName = getParameterByName('tagName');
 
-let request_url = "api/post-preview?limit=" + limit;
+let request_url = "http://167.99.238.182:8080/Blockzone/api/post-preview?limit=" + limit;
 request_url += category ? "&category="+category : '';
 request_url += region ? "&region="+region : '';
 request_url += author ? "&author="+author : '';
@@ -116,7 +116,7 @@ getPostPreviews();
 jQuery.ajax({
     dataType: "json", // Setting return data type
     method: "GET", // Setting request method
-    url: "api/topnews?limit=" + '10', // Setting request url, which is mapped by StarsServlet in Stars.java
+    url: "http://167.99.238.182:8080/Blockzone/api/topnews?limit=" + '10', // Setting request url, which is mapped by StarsServlet in Stars.java
     success: (resultData) => handleTopPostResult(resultData) // Setting callback function to handle data returned successfully by the StarsServlet
 });
 
@@ -133,7 +133,7 @@ function subscribe() {
     jQuery.ajax({
         dataType: "json",
         method: "GET",
-        url: "api/subscribe?email=" + email,
+        url: "http://167.99.238.182:8080/Blockzone/api/subscribe?email=" + email,
         success: function(resultData) {
             console.log(resultData);
             if(resultData['status'] == true) {
