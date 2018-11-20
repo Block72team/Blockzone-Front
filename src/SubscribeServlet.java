@@ -15,6 +15,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import javax.mail.*;
+import javax.mail.internet.*;
+import javax.activation.*;
+import java.util.Properties;
+
 // Declaring a WebServlet called StarServlet, which maps to url "/api/star"
 @WebServlet(name = "SubscribeServlet", urlPatterns = "/api/subscribe")
 public class SubscribeServlet extends HttpServlet {
@@ -33,6 +38,8 @@ public class SubscribeServlet extends HttpServlet {
 
 		// Retrieve parameter limit from url request.
 		String email = request.getParameter("email");
+		String key = request.getParameter("key");
+		int hashCode = key!=null ? Integer.parseInt(key) : email.hashCode();
 
 		// Output stream to STDOUT
 		PrintWriter out = response.getWriter();
@@ -51,14 +58,20 @@ public class SubscribeServlet extends HttpServlet {
 			Connection dbcon = dataSource.getConnection();
 
 			// Construct a update with parameter represented by "?"
-			String update = "insert into subscribe values (?)";
+			String update;
+			if(key==null) 
+				update = "insert into subscribe (activated, email, hashCode) values (?,?,?)";
+			else
+				update = "update subscribe set activated = ? where (email = ? and hashCode = ?)";
 
 			// Declare our statement
 			PreparedStatement statement = dbcon.prepareStatement(update);
 
 			// Set the parameter represented by "?" in the update to the id we get from url,
 			// num 1 indicates the first "?" in the update
-			statement.setString(1, email);
+			statement.setInt(1, key==null ? 0 : 1);
+			statement.setString(2, email);
+			statement.setInt(3, hashCode);
 
 			// Perform the update
 			if(statement.executeUpdate() > 0) {
@@ -70,20 +83,43 @@ public class SubscribeServlet extends HttpServlet {
 				// set response status to 200 (OK)
 				response.setStatus(200);
 			} else {
-				throw new Exception("Fail to subscribe");
+				throw new Exception("Fail to subscribe! Please try again later or use another email!");
+			}
+
+			// Send confirmation email
+			if(key == null) {
+				String username = "hello@blockzone.com";
+				String password = "Blockzone18!";
+
+				Properties props = new Properties();
+				props.put("mail.smtp.starttls.enable", "true");
+				props.put("mail.smtp.host", "smtp-mail.outlook.com");
+
+				Session session = Session.getInstance(props);
+				MimeMessage msg = new MimeMessage(session);
+
+				// set the message content here
+				msg.setFrom(new InternetAddress(username, "NoReply"));
+				msg.addRecipient(Message.RecipientType.TO,
+						new InternetAddress(email, "Mr. Subscriber"));
+				msg.setSubject("Blockzone Subscription Confirmation");
+				msg.setText("Please use this link to confirm your subscription: \n http://167.99.238.182:8080/Blockzone/subscribe.html?email=" + email + "&key=" + hashCode);
+
+				Transport.send(msg, username, password);
 			}
 
 			statement.close();
 			dbcon.close();
 		} catch (Exception e) {
+			e.printStackTrace();
 			// write error message JSON object to output
 			JsonObject jsonObject = new JsonObject();
 			jsonObject.addProperty("errorMessage", e.getMessage());
 			out.write(jsonObject.toString());
 
 			// set reponse status to 500 (Internal Server Error)
-			response.setStatus(500);
-		}
+			response.setStatus(200);
+		} 
 		out.close();
 
 	}

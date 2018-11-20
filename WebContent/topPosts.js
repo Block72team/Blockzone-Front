@@ -1,4 +1,21 @@
 
+function subscribe() {
+    var email = jQuery("#subscribe-field-blog_subscription-3").val();
+    jQuery.ajax({
+        dataType: "json",
+        method: "GET",
+        url: "http://localhost:8080/Blockzone/api/subscribe?email=" + email,
+        success: function(resultData) {
+            console.log(resultData);
+            if(resultData['status'] == true) {
+                alert("Please Check your email to confirm the subscribtion");
+            } else {
+                alert("Fail to subsribe.");
+            }
+        }
+    })
+}
+
 function handleTopPostResult(resultData) {
     console.log("handleTopPostResult: ");
     console.log(resultData);
@@ -29,3 +46,4 @@ jQuery.ajax({
     url: "http://167.99.238.182:8080/Blockzone/api/topnews?limit=" + '10', 
     success: (resultData) => handleTopPostResult(resultData) 
 });
+

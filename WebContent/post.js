@@ -136,7 +136,7 @@ function subscribe() {
         success: function(resultData) {
             console.log(resultData);
             if(resultData['status'] == true) {
-                alert("You've successfully subscribed!");
+                alert("Please Check your email to confirm the subscribtion");
             } else {
                 alert("Fail to subsribe.");
             }

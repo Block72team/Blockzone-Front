@@ -105,7 +105,7 @@ function getCategoryFeatured() {
         jQuery.ajax({
             dataType: "json", // Setting return data type
             method: "GET", // Setting request method
-            url: "http://167.99.238.182:8080/Blockzone/api/post-preview?limit=1&page=0&category=" + i + '&tag=212&tagName=Blockchain',
+            url: "http://167.99.238.182:8080/Blockzone/api/post-preview?limit=1&page=0&category=" + i + '&tag=473&tagName=Blockchain',
             success: (resultData) => handleCategoryFeatured(resultData) // Setting callback function to handle data returned successfully
         });
     }
@@ -129,23 +129,6 @@ function search() {
     window.location.href = "post-preview.html?keyword="+keyword;
 }
 
-function subscribe() {
-    var email = jQuery("#subscribe-field-blog_subscription-3").val();
-    jQuery.ajax({
-        dataType: "json",
-        method: "GET",
-        url: "http://167.99.238.182:8080/Blockzone/api/subscribe?email=" + email,
-        success: function(resultData) {
-            console.log(resultData);
-            if(resultData['status'] == true) {
-                alert("You've successfully subscribed!");
-            } else {
-                alert("Fail to subsribe.");
-            }
-        }
-    })
-}
-
 
 /**
  * Once this .js is loaded, following scripts will be executed by the browser
@@ -159,7 +142,7 @@ let featuredLimit = 4;
 jQuery.ajax({
     dataType: "json", 
     method: "GET",
-    url: "http://167.99.238.182:8080/Blockzone/api/post-preview?limit=" + featuredLimit + '&page=' + page + '&tag=210&tagName=Featured',
+    url: "http://167.99.238.182:8080/Blockzone/api/post-preview?limit=" + featuredLimit + '&page=' + page + '&tag=386&tagName=Featured',
     success: (resultData) => handleFeaturedPostResult(resultData) 
 });
 
