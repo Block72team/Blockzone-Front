@@ -1,4 +1,4 @@
-#body p {
+#body .brief-content {
     margin-bottom: 0%;
     font-size: 1em;
     font-weight: 100;  
@@ -33,6 +33,15 @@
     -webkit-border-radius: 0 !important;
     -moz-border-radius: 0 !important;
     border-radius: 0 !important;
+}
+
+#carousel .featured {
+    max-height: 30vw;
+}
+
+#carousel .category-top {
+    height: 10vw; 
+    overflow: hidden
 }
 
 /*CATEGORIES BADGE*/
@@ -70,5 +79,14 @@
     }
     #body h5 { /* 100+1=101 priority score, yay! */
         font-size: 0.5em;
+    }
+
+    #carousel .featured {
+        max-height: 100vw;
+    }
+    
+    #carousel .category-top {
+        height: 50vw; 
+        overflow: hidden
     }
 }

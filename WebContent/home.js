@@ -28,7 +28,7 @@ function handlePostPreviewResult(resultData) {
         rawHTML += '<img class="align-self-start mr-3" src="' + resultData[i]['thumb_url'] + '" style="width: 30%" alt="Generic placeholder image">';
         rawHTML += '<div class="media-body">';
         rawHTML += '<h3 class="mt-0"><a href="post.html?id=' + resultData[i]['id'] + '">' + resultData[i]['title'] + '</a></h3>';
-        rawHTML += '<p>' + handleContent(resultData[i]['content']) + '</p>';
+        rawHTML += '<p class="brief-content d-none d-lg-block">' + handleContent(resultData[i]['content']) + '</p>';
         rawHTML += '<div style="display: inline-block;color: gray;float: right">';
         rawHTML += '<small><i class="far fa-star" style="margin-right: 5px;"></i><a href="post-preview.html?category=' + resultData[i]['c_id'] + '">' + resultData[i]['c_name'] + '</a></small>';
         rawHTML += '<small><i class="far fa-user" style="margin-right: 5px; margin-left: 10px"></i><a href="post-preview.html?author=' + resultData[i]['author'] + '">' + resultData[i]['author'] + '</a></small>';
@@ -49,7 +49,7 @@ function handleFeaturedPostResult(resultData) {
     for(let i = 0; i < featuredLimit; i++) {
         let rawHTML =   '<div class="carousel-item ' + active + ' ">' +
                             '<div class="card text-white">' +
-                                '<div style="max-height: 30vw">' +
+                                '<div class="featured">' +
                                     '<img class="card-img img-fluid" src="' + resultData[i]['photo_url'] + '" alt="">' +
                                 '</div>' +
                                 '<div class="card-img-overlay d-flex linkfeat">' +
@@ -76,37 +76,37 @@ function handleFeaturedPostResult(resultData) {
 
 }
 
-function handleCategoryFeatured(resultData) {
-    console.log("handling category featured");
+function handleCategoryFeatured(resultData, category_tag) {
+    console.log("handling category featured for" + category_tag);
     console.log(resultData);
 
-    let categoryFeatured = jQuery("#category-featured");
+    let categoryFeatured = jQuery("#" + category_tag);
 
     for(let i = 0; i < resultData.length; i++) {
-        let rawHTML =   '<div class="col-3">' +
-                            '<div class="card text-white">' + 
-                                '<div style="height: 10vw; overflow: hidden">' +
-                                    '<img class="card-img img-fluid" src="' + resultData[i]['thumb_url'] + '" alt="">' +
-                                '</div>' +
-                                '<div class="card-img-overlay d-flex linkfeat-sub">' +
-                                    '<a href="post.html?id=' + resultData[i]['id'] + '" class="align-self-end">' + 
-                                        '<span class="badge">' + resultData[i]['c_name'] + '</span>' +
-                                        '<h6 class="card-title">' + resultData[i]['title'] + '</h6>' +
-                                    '</a>' +
-                                '</div>' +
+        let rawHTML =   '<div class="card text-white">' + 
+                            '<div class="category-top">' +
+                                '<img class="card-img img-fluid" src="' + resultData[i]['thumb_url'] + '" alt="">' +
+                            '</div>' +
+                            '<div class="card-img-overlay d-flex linkfeat-sub">' +
+                                '<a href="post.html?id=' + resultData[i]['id'] + '" class="align-self-end">' + 
+                                    '<span class="badge">' + resultData[i]['c_name'] + '</span>' +
+                                    '<h6 class="card-title">' + resultData[i]['title'] + '</h6>' +
+                                '</a>' +
                             '</div>' +
                         '</div>';
+                        
         categoryFeatured.append(rawHTML);
     }
 }
 
 function getCategoryFeatured() {
-    for(let i = 0; i < 4; i++) {
+    category = ['news-top', 'insight-top', 'company-top', 'event-top'];
+    for(let i = 1; i <= category.length; i++) {
         jQuery.ajax({
             dataType: "json", // Setting return data type
             method: "GET", // Setting request method
             url: "http://167.99.238.182:8080/Blockzone/api/post-preview?limit=1&page=0&category=" + i + '&tag=473&tagName=Blockchain',
-            success: (resultData) => handleCategoryFeatured(resultData) // Setting callback function to handle data returned successfully
+            success: (resultData) => handleCategoryFeatured(resultData, category[i-1]) // Setting callback function to handle data returned successfully
         });
     }
 }
