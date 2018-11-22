@@ -1,20 +1,3 @@
-function subscribe() {
-    var email = jQuery("#subscribe-field-blog_subscription-3").val();
-    jQuery.ajax({
-        dataType: "json",
-        method: "GET",
-        url: "http://localhost:8080/Blockzone/api/subscribe?email=" + email,
-        success: function(resultData) {
-            console.log(resultData);
-            if(resultData['status'] == true) {
-                alert("Please Check your email to confirm the subscribtion");
-            } else {
-                alert("Fail to subsribe.");
-            }
-        }
-    })
-}
-
 function getParameterByName(target) {
     // Get request URL
     let url = window.location.href;
@@ -34,17 +17,22 @@ function getParameterByName(target) {
 let email = getParameterByName('email');
 let hashkey = getParameterByName('key');
 
-if(email && hashkey) {
+if(email || hashkey) {
+    $("#loading-popup").popup('show');
     jQuery.ajax({
         dataType: "json",
         method: "GET",
-        url: "http://localhost:8080/Blockzone/api/subscribe?email=" + email + '&key=' + hashkey,
+        url: "http://167.99.238.182:8080/Blockzone/api/subscribe?email=" + email + (hashkey? '&key=' + hashkey : ""),
         success: function(resultData) {
-            console.log(resultData);
+            $("#loading-popup").popup('hide');
             if(resultData['status'] == true) {
-                alert("You've successfully subscribed!");
+                if(hashkey) {
+                    $("#success-popup").popup('show');
+                } else {
+                    $("#confirm-popup").popup('show');
+                }
             } else {
-                alert("Fail to subsribe.");
+                $("#fail-popup").popup('show');
             }
         }
     })

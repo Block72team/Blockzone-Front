@@ -12,6 +12,14 @@
         crossorigin="anonymous">
     <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.rawgit.com/vast-engineering/jquery-popup-overlay/1.7.13/jquery.popupoverlay.js"></script>
 </head>
 <body>
 
@@ -80,11 +88,13 @@
                         <div class="col-lg-9">
                             <hr>
                             <div style="font-size: 3em;font-weight: 100;color: #585493;">Never miss a single story.</div>
-                            <input type="email" name="email" required="required" class="required btn-block" value="" id="subscribe-field-blog_subscription-3"
-                                placeholder="Email Address" style="color: #7c8a96;box-sizing: border-box;padding: 15px;border: solid 1px #D4DDE5;border-radius: 2px;font-size: 17px;margin-top: 20px;margin-right: 20px">
-                            <div style="margin-top: 20px; margin-bottom: 20px">
-                                <button type="button" class="btn btn-primary" style="background-color: #585493;border-color: #585493;" onclick="subscribe()">Subscribe</button>
-                            </div>
+                            <form action="subscribe.html">
+                                <input type="email" name="email" required="required" class="required btn-block" value="" id="subscribe-field-blog_subscription-3"
+                                    placeholder="Email Address" style="color: #7c8a96;box-sizing: border-box;padding: 15px;border: solid 1px #D4DDE5;border-radius: 2px;font-size: 17px;margin-top: 20px;margin-right: 20px">
+                                <div style="margin-top: 20px; margin-bottom: 20px">
+                                    <button type="submit" class="btn btn-primary" style="background-color: #585493;border-color: #585493;">Subscribe</button>
+                                </div>
+                            </form>
                         </div>
                         <div class="col-lg-3">
                             <div style="padding-bottom: 40px">
@@ -152,12 +162,19 @@
             </footer>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <div id="loading-popup" class="bg-light p-5">
+        <div style="font-size: 3em;font-weight: 100;color: #585493;">Loading... </div>
+    </div>
+    <div id="success-popup" class="bg-light p-5">
+        <div style="font-size: 3em;font-weight: 100;color: #585493;">You've successfully subscribed! </div>
+    </div>
+    <div id="confirm-popup" class="bg-light p-5">
+        <div style="font-size: 3em;font-weight: 100;color: #585493;">Please Check your email to confirm the subscribtion </div>
+    </div>
+    <div id="fail-popup" class="bg-light p-5">
+        <div style="font-size: 3em;font-weight: 100;color: #585493;">Fail to subsribe. </div>
+    </div>
 
     <script src="subscribe.js"></script>
 </body>

@@ -152,10 +152,16 @@ getPostPreviews(); //initial
 getCategoryFeatured();
 
 // Initialize the plugin
-$('#subscribe-popup').popup({
-    transition: 'all 0.3s',
-    scrolllock: true,
-    autoopen: true,
+$(document).ready(function() {
+
+    $('#subscribe-popup').popup({
+        transition: 'all 0.3s',
+        scrolllock: true,
+        autoopen: true,
+        detach: true,
+        focuselement: '#subscribe-field-blog_subscription-3'
+    });
+
 });
 
 

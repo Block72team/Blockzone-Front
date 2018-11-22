@@ -4,7 +4,7 @@ function subscribe() {
     jQuery.ajax({
         dataType: "json",
         method: "GET",
-        url: "http://localhost:8080/Blockzone/api/subscribe?email=" + email,
+        url: "http://167.99.238.182:8080/Blockzone/api/subscribe?email=" + email,
         success: function(resultData) {
             console.log(resultData);
             if(resultData['status'] == true) {
