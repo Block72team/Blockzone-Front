@@ -105,7 +105,7 @@ function getCategoryFeatured() {
         jQuery.ajax({
             dataType: "json", // Setting return data type
             method: "GET", // Setting request method
-            url: "http://167.99.238.182:8080/Blockzone/api/post-preview?limit=1&page=0&category=" + i + '&tag=473&tagName=Blockchain',
+            url: "http://167.99.238.182:8080/Blockzone/api/post-preview?limit=1&page=0&category=" + i + '&tag=837&tagName=top',
             success: (resultData) => handleCategoryFeatured(resultData, category[i-1]) // Setting callback function to handle data returned successfully
         });
     }
@@ -142,7 +142,7 @@ let featuredLimit = 4;
 jQuery.ajax({
     dataType: "json", 
     method: "GET",
-    url: "http://167.99.238.182:8080/Blockzone/api/post-preview?limit=" + featuredLimit + '&page=' + page + '&tag=386&tagName=Featured',
+    url: "http://167.99.238.182:8080/Blockzone/api/post-preview?limit=" + featuredLimit + '&page=' + page + '&tag=591&tagName=Featured',
     success: (resultData) => handleFeaturedPostResult(resultData) 
 });
 
