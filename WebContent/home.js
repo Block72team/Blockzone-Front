@@ -153,6 +153,7 @@ getCategoryFeatured();
 
 // Initialize the plugin
 if(localStorage.firstTime == undefined) {
+    console.log('Here')
     $('#subscribe-popup').popup({
         transition: 'all 0.3s',
         scrolllock: true,
@@ -160,6 +161,8 @@ if(localStorage.firstTime == undefined) {
         detach: true,
         focuselement: '#subscribe-field-blog_subscription-3'
     });
+} else {
+    $('#subscribe-popup').popup();
 }
 localStorage.firstTime = true;
 
