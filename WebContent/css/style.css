@@ -1,6 +1,6 @@
 #body .brief-content {
     margin-bottom: 0%;
-    font-size: 1em;
+    font-size: 0.8em;
     font-weight: 100;  
 }
 
@@ -9,9 +9,35 @@
 }
 
 #body a {
-    color: black;
+	color:black;
     font-weight: 200;
 }
+
+
+
+.nav-link:hover{
+	color:#939393 !important;
+}
+
+.dropdownbtn{
+	background-color:none;
+    color: #000000 !important;
+    border: none;
+	font-weight: 200 !important;
+	
+}
+
+.dropdown:hover .dropdown-menu {display: block;}
+
+.dropdownbtn:click {
+	border: none;
+}
+
+.foot:hover{
+	color:#939393 !important;
+	text-decoration: none !important;
+}
+
 
 /*HYPER LINK*/
 #carousel a:hover {}
@@ -28,6 +54,7 @@
     outline: none !important;
 }
 
+
 /*ROUNDED CORNER*/
 #carousel * {
     -webkit-border-radius: 0 !important;
@@ -40,9 +67,10 @@
 }
 
 #carousel .category-top {
-    height: 10vw; 
+    height: 12vw; 
     overflow: hidden
 }
+
 
 /*CATEGORIES BADGE*/
 #carousel .badge {
@@ -82,11 +110,16 @@
     }
 
     #carousel .featured {
-        max-height: 100vw;
+        max-height: 120vw;
     }
     
     #carousel .category-top {
-        height: 50vw; 
-        overflow: hidden
+        height: 30vw; 
+        overflow: hidden;
     }
+	
+	
 }
+
+
+	
