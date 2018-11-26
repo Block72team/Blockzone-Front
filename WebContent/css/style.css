@@ -13,6 +13,12 @@
     font-weight: 200;
 }
 
+#body .preview-img {
+    height: 12vw;
+    max-width: 30%;
+    overflow: hidden;
+}
+
 
 
 .nav-link:hover{
@@ -108,13 +114,17 @@
     #body h5 { /* 100+1=101 priority score, yay! */
         font-size: 0.5em;
     }
+    #body .preview-img {
+        height: 20vw;
+        max-width: 30%;
+    }
 
     #carousel .featured {
         max-height: 120vw;
     }
     
     #carousel .category-top {
-        height: 30vw; 
+        height: 40vw; 
         overflow: hidden;
     }
 	

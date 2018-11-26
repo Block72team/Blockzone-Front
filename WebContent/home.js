@@ -9,6 +9,12 @@ function handleContent(content) {
     }
     return result;
 }
+
+function handleTitle(title) {
+    console.log(title)
+    return title.length < 100 ? title : title.substring(0, 100)+'...';
+}
+
 /**
  * Handles the data returned by the API, read the jsonObject and populate data into html elements
  * @param resultData jsonObject
@@ -24,16 +30,22 @@ function handlePostPreviewResult(resultData) {
     // Iterate through resultData, no more than 10 entries
     for (let i = 0; i < resultData.length; i++) {
         // Concatenate the html tags with resultData jsonObject
-        let rawHTML = '<div class="media">';
-        rawHTML += '<img class="align-self-start mr-3" src="' + resultData[i]['thumb_url'] + '" style="width: 30%" alt="Generic placeholder image">';
-        rawHTML += '<div class="media-body">';
-        rawHTML += '<h3 class="mt-0"><a href="post.html?id=' + resultData[i]['id'] + '">' + resultData[i]['title'] + '</a></h3>';
-        rawHTML += '<p class="brief-content d-none d-lg-block">' + handleContent(resultData[i]['content']) + '</p>';
-        rawHTML += '<div style="display: inline-block;color: gray;float: right">';
-        rawHTML += '<small><i class="far fa-star" style="margin-right: 5px;"></i><a href="post-preview.html?category=' + resultData[i]['c_id'] + '">' + resultData[i]['c_name'] + '</a></small>';
-        rawHTML += '<small><i class="far fa-user" style="margin-right: 5px; margin-left: 10px"></i><a href="post-preview.html?author=' + resultData[i]['author'] + '">' + resultData[i]['author'] + '</a></small>';
-        rawHTML += '<small><i class="far fa-clock" style="margin-right: 5px;margin-left: 10px"></i><a href="post-preview.html?time=' + resultData[i]['update_time'].substring(0,10) + '">' + resultData[i]['update_time'].substring(0,10) + '</a></small>';
-        rawHTML += '</div></div></div><hr>';
+        let rawHTML =   '<div class="media">' +
+                            '<div class="preview-img mr-3">'+
+                                '<img class="align-self-start img-fluid" src="' + resultData[i]['thumb_url'] + '" alt="Generic placeholder image">' +
+                            '</div>' +
+                            '<div class="media-body">' + 
+                                '<h3 class="mt-0">' + 
+                                    '<a href="post.html?id=' + resultData[i]['id'] + '">' + resultData[i]['title'] + '</a>' + 
+                                '</h3>' +
+                                '<p class="brief-content d-none d-lg-block">' + handleContent(resultData[i]['content']) + '</p>' +
+                                '<div style="display: inline-block;color: gray;float: right">' +
+                                    '<small><i class="far fa-star" style="margin-right: 5px;"></i><a href="post-preview.html?category=' + resultData[i]['c_id'] + '">' + resultData[i]['c_name'] + '</a></small>' +
+                                    '<small><i class="far fa-user" style="margin-right: 5px; margin-left: 10px"></i><a href="post-preview.html?author=' + resultData[i]['author'] + '">' + resultData[i]['author'] + '</a></small>' +
+                                    '<small><i class="far fa-clock" style="margin-right: 5px;margin-left: 10px"></i><a href="post-preview.html?time=' + resultData[i]['update_time'].substring(0,10) + '">' + resultData[i]['update_time'].substring(0,10) + '</a></small>' +
+                                '</div>' + 
+                            '</div>' +
+                        '</div><hr>';
 
         postPreviewElement.append(rawHTML);
     }
@@ -56,7 +68,7 @@ function handleFeaturedPostResult(resultData) {
                                     '<a href="post.html?id=' + resultData[i]['id'] + '" class="align-self-end">' + 
                                         '<span class="badge">' + resultData[i]['c_name'] + '</span>' +
                                         '<h4 class="card-title">' + resultData[i]['title'] + '</h4>' +
-                                        '<p class="textfeat" style="display: none;">' + handleContent(resultData[i]['content']) + '</p>' +
+                                        '<p class="textfeat d-none">' + handleContent(resultData[i]['content']) + '</p>' +
                                     '</a>' +
                                 '</div>' +
                             '</div>' +
@@ -77,7 +89,7 @@ function handleFeaturedPostResult(resultData) {
 }
 
 function handleCategoryFeatured(resultData, category_tag) {
-    console.log("handling category featured for" + category_tag);
+    console.log("handling category featured for " + category_tag);
     console.log(resultData);
 
     let categoryFeatured = jQuery("#" + category_tag);
@@ -90,7 +102,7 @@ function handleCategoryFeatured(resultData, category_tag) {
                             '<div class="card-img-overlay d-flex linkfeat-sub">' +
                                 '<a href="post.html?id=' + resultData[i]['id'] + '" class="align-self-end">' + 
                                     '<span class="badge">' + resultData[i]['c_name'] + '</span>' +
-                                    '<h6 class="card-title">' + resultData[i]['title'] + '</h6>' +
+                                    '<h6 class="card-title">' + handleTitle(resultData[i]['title']) + '</h6>' +
                                 '</a>' +
                             '</div>' +
                         '</div>';
