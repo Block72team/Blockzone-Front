@@ -29,3 +29,6 @@ target/
 deploy.sh
 .DS_Store
 test.html
+
+.project
+.classpath
