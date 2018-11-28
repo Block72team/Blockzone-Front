@@ -12,7 +12,7 @@ function handleContent(content) {
 
 function handleTitle(title) {
     console.log(title)
-    return title.length < 60 ? title : title.substring(0, 57)+'...';
+    return title.length < 50 ? title : title.substring(0, 47)+'...';
 }
 
 /**
