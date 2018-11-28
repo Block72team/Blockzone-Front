@@ -68,7 +68,7 @@ function handleFeaturedPostResult(resultData) {
                                     '<a href="post.html?id=' + resultData[i]['id'] + '" class="align-self-end">' + 
                                         '<span class="badge">' + resultData[i]['c_name'] + '</span>' +
                                         '<h4 class="card-title">' + resultData[i]['title'] + '</h4>' +
-                                        '<p class="textfeat d-none">' + handleContent(resultData[i]['content']) + '</p>' +
+                                        '<p class="textfeat" style="display: none">' + handleContent(resultData[i]['content']) + '</p>' +
                                     '</a>' +
                                 '</div>' +
                             '</div>' +
