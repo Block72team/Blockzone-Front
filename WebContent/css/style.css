@@ -4,6 +4,11 @@
     font-weight: 100;  
 }
 
+body{
+	font-family: 'Signika', sans-serif;
+	line-height: 1.6;
+}
+
 #body h1 {
     font-size: 1.5vw;
 }
@@ -21,6 +26,7 @@
 
 
 
+
 .nav-link:hover{
 	color:#939393 !important;
 }
@@ -35,7 +41,7 @@
 
 .dropdown:hover .dropdown-menu {display: block;}
 
-.dropdownbtn:click {
+.dropdownbtn:click .dropdownbtn:focus .dropdownbtn:active{
 	border: none;
 }
 
