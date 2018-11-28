@@ -16,8 +16,16 @@ body{
 #body a {
 	color:black;
     font-weight: 200;
+	font-size: 0.8em;
 }
 
+.nav-link {
+	font-size:0.9em !important;
+}
+
+.dropdown-item{
+	font-size:1em !important;
+}
 
 #post a {
 	font-size:0.8em;
@@ -55,6 +63,9 @@ body{
 	text-decoration: none !important;
 }
 
+.foot{
+	font-size:1em !important;
+}
 
 /*HYPER LINK*/
 #carousel a:hover {}
@@ -141,7 +152,12 @@ body{
 	#body a {
 	color:black;
     font-weight: 200;
-}
+		
+	}
+	
+	.navbar-toggler{
+		margin-top: 50%;
+	}
 	
 }
 
