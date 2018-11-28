@@ -18,6 +18,11 @@ body{
     font-weight: 200;
 }
 
+
+#post a {
+	font-size:0.8em;
+}
+
 #body .preview-img {
     height: 12vw;
     max-width: 30%;
@@ -133,7 +138,10 @@ body{
         height: 40vw; 
         overflow: hidden;
     }
-	
+	#body a {
+	color:black;
+    font-weight: 200;
+}
 	
 }
 
