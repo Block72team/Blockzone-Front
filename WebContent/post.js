@@ -44,14 +44,14 @@ function handlePostResult(resultData) {
         rowHTML += '<h2 style="font-weight: 200;margin-bottom: 50px;margin-top: 50px;">' + resultData[i]['title'] + '</h2>';
         rowHTML += '<img class="col-11 p-0 w-100" src="' + resultData[i]['photo_url'] + '" alt="Generic placeholder image">';
         rowHTML += '<div class="row" style="margin-top: 50px">';
-        rowHTML += '<div class="col-3"><div class="sticky-top"><h5>Category:<br><a href="post-preview.html?category=' + resultData[i]['c_id'] + '">' + resultData[i]['c_name'] + '</a></h5><hr>';
+        rowHTML += '<div class="col-12 col-lg-3"><div class="sticky-top"><h5>Category:<br><a href="post-preview.html?category=' + resultData[i]['c_id'] + '">' + resultData[i]['c_name'] + '</a></h5><hr>';
         rowHTML += handleTags(resultData[i]['tags']) + '<hr>';
         rowHTML += '<h5>Share This:</h5>';
         rowHTML += '<a class="btn btn-social-icon btn-twitter" style="font-size: 2em;" href="https://twitter.com/intent/tweet/?url=blockzone.com/post?id=' + resultData[i]['id'] + '"><span class="fab fa-twitter"></span> </a>';
         rowHTML += '<a class="btn btn-social-icon btn-facebook" style="font-size: 2em;" href="https://facebook.com/sharer/sharer.php?u=blockzone.com/post?id=' + resultData[i]['id'] + '"><span class="fab fa-facebook"></span> </a>';
         rowHTML += '<a class="btn btn-social-icon btn-linkedin" style="font-size: 2em;" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=blockzone.com/post?id=' + resultData[i]['id'] + '"><span class="fab fa-linkedin"></span> </a>';
         rowHTML += '</div></div>';
-        rowHTML += '<div class="col-8">';
+        rowHTML += '<div class="col-12 col-lg-9">';
         rowHTML += '<p>' + resultData[i]['content'] + '</p>';
         rowHTML += '<br><center><button id="like" class="btn btn-outline-secondary" type="button" onclick="like()"><i id="like-icon" class="fas fa-thumbs-up" style="margin-right: 10px;"></i>Like this!</button></center>';
         rowHTML += '</div></div><hr>';
